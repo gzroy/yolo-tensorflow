@@ -7,10 +7,12 @@ The whole training process include the below parts:
 Download the Imagenet training and validiation dataset, decompress and place the images on floder "Imagenet/Imagenet/train_imagenet/" and 'Imagenet/Imagenet/val_imagenet/'.
 Run the imagenet_preprocess.py to generate the training records and validiation records in TFRECORD format.
 Run the imagenet_train.ipynb to train the image feature extractor on Imagnent dataset. It can achieve around TOP-5 85% accuracy on validation dataset.
+
 **2. Train on VOC2012/2007 dataset**
 Download the PASCAL VOC 2012 and 2007 dataset. 
 Run the pascal_bbox_preprocess.py to parse the bbox information.
 Run the pascal_tfrecord_process_yolov2.py to generate the training records and validiation records in TFRECORD format.
 Run the yolo_training.ipynb to start training.
+
 **3. Prdiction**
 Run the yolo_predict.ipynb to detect object on the picture.
