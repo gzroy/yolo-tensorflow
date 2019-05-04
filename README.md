@@ -21,4 +21,6 @@ Run the yolo_training.ipynb to start training.
 Run the yolo_predict.ipynb to detect object on the picture.
 Here are some prediction examples.
 ![Image text](https://github.com/gzroy/yolo-tensorflow/raw/master/images/dog_yolo_50000.jpg)
+![Image text](https://github.com/gzroy/yolo-tensorflow/raw/master/images/person_yolo_30000.jpg)
+![Image text](https://github.com/gzroy/yolo-tensorflow/raw/master/images/cat1_yolo_50000.jpg)
 
