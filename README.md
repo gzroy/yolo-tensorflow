@@ -19,4 +19,6 @@ Run the yolo_training.ipynb to start training.
 **3. Prdiction**
 
 Run the yolo_predict.ipynb to detect object on the picture.
+Here are some prediction examples.
+![Image text](https://github.com/gzroy/yolo-tensorflow/raw/master/images/dog_yolo_50000.jpg)
 
