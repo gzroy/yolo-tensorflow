@@ -45,36 +45,6 @@ def inference(images, pretrain_trainable=True, wd=0.0005, pretrain_training=True
         new_conv24 = _conv('new_conv24', new_conv23, 3, 1024, 1024, 1, 'SAME', True, 0.01, yolo_training) #7*7*1024
         new_conv25 = _conv('new_conv25', new_conv24, 3, 1024, 30, 1, 'SAME', True, 0.01, yolo_training) #7*7*30
         return new_conv25
-        '''
-        #avg_layer = tf.reduce_mean(new_conv24, axis=[1,2], keepdims=True) 
-        new_flatten = tf.layers.flatten(inputs=new_conv25, name='new_flatten')
-        
-        with tf.variable_scope('new_local1', reuse=tf.AUTO_REUSE):
-            #weights = tf.get_variable(initializer=tf.truncated_normal([7*7*30,4096], dtype=tf.float32, stddev=1/(4096)), trainable=True, name='weights')
-            weights = tf.get_variable(initializer=tf.contrib.layers.xavier_initializer(uniform=False), shape=[7*7*30,4096], trainable=True, name='weights')
-            #weights = tf.get_variable(initializer=tf.contrib.layers.variance_scaling_initializer(factor=1.0,mode='FAN_AVG',uniform=False), shape=[1024,4096], trainable=True, name='weights')
-            #weights = tf.get_variable(initializer=tf.constant(0.01, shape=[1024,4096], dtype=tf.float32), trainable=True, name='weights')
-            weight_decay = tf.multiply(tf.nn.l2_loss(weights), 0.0005, name='weight_loss')
-            tf.add_to_collection('losses', weight_decay)
-            biases = tf.get_variable(initializer=tf.constant(1.0, shape=[4096], dtype=tf.float32), trainable=True, name='biases')
-            new_local1 = tf.nn.leaky_relu(tf.nn.xw_plus_b(new_flatten, weights, biases), alpha=0.1, name='new_local1')
-  
-        if yolo_training: 
-            dropout_layer = tf.nn.dropout(new_local1, rate=0.5)
-        else:
-            dropout_layer = tf.nn.dropout(new_local1, rate=0.0)
-
-        with tf.variable_scope('new_local2', reuse=tf.AUTO_REUSE):
-            #weights = tf.get_variable(initializer=tf.truncated_normal([4096, 7*7*30], dtype=tf.float32, stddev=1/(7*7*30)), trainable=True, name='weights')
-            weights = tf.get_variable(initializer=tf.contrib.layers.xavier_initializer(uniform=False), shape=[4096, 7*7*30], trainable=True, name='weights')
-            #weights = tf.get_variable(initializer=tf.contrib.layers.variance_scaling_initializer(factor=1.0,mode='FAN_AVG',uniform=False), shape=[4096, 7*7*30], trainable=True, name='weights')
-            #weights = tf.get_variable(initializer=tf.constant(0.01, shape=[4096, 7*7*30], dtype=tf.float32), trainable=True, name='weights')
-            weight_decay = tf.multiply(tf.nn.l2_loss(weights), 0.0005, name='weight_loss')
-            tf.add_to_collection('losses', weight_decay)
-            biases = tf.get_variable(initializer=tf.constant(1.0, shape=[7*7*30], dtype=tf.float32), trainable=True, name='biases')
-            new_local2 = tf.nn.xw_plus_b(dropout_layer, weights, biases, name='new_loca2')
-        return new_local2, new_local1, new_flatten
-        '''
     #For Imagenet pretrain
     else:
         avg_layer = tf.reduce_mean(conv20, axis=[1,2], keepdims=True)    #1024
